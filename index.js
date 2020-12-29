@@ -6,8 +6,46 @@ module.exports = class HintClient {
     this.baseUri = 'https://api.hint.com/api';
   }
 
-  async getLeads(){
+  async getLeadSources(){
     let hintResponse = await axios.get(`${this.baseUri}/provider/lead_sources`, {
+      auth: {
+        username: this.client_key,
+        pass: this.password
+      }
+    })
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
+    return(hintResponse);
+  };
+
+  async getLocations(){
+    let hintResponse = await axios.get(`${this.baseUri}/provider/locations`, {
+      auth: {
+        username: this.client_key,
+        pass: this.password
+      }
+    })
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
+    return(hintResponse);
+  };
+
+  async getPractitioners(){
+    let hintResponse = await axios.get(`${this.baseUri}/provider/practitioners`, {
       auth: {
         username: this.client_key,
         pass: this.password
