@@ -10,8 +10,59 @@ module.exports = class HintClient {
     return({ auth: { username: this.client_key, pass: this.password } })
   };
 
+  async deleteCard(params){
+    let hintResponse = await axios.delete(`${this.baseUri}/provider/cards/${params.id}`, this.credentials())
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    return(hintResponse);
+  };
+
+  async createCard(params){
+    let hintResponse = await axios.post(`${this.baseUri}/provider/cards`, params, this.credentials())
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    return(hintResponse);
+  };
+
+  async deleteMembership(params){
+    let hintResponse = await axios.delete(`${this.baseUri}/provider/memberships/${params.id}`, this.credentials())
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    return(hintResponse);
+  };
+
+  async createMembership(params){
+    let hintResponse = await axios.post(`${this.baseUri}/provider/memberships`, params, this.credentials())
+      .then(function (response) {
+        console.log(`STATUS: ${response.status}`)
+        return({ data: response.data, status: response.status })
+      })
+      .catch(function (error) {
+        console.log(`STATUS: ${error.response.status}`)
+        return({ data: error.response.data, status: error.response.status })
+      });
+    return(hintResponse);
+  };
+
   async createPatient(params){
-    let credentials = { auth: { username: this.client_key, pass: this.password } }
     let hintResponse = await axios.post(`${this.baseUri}/provider/patients`, params, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
