@@ -34,7 +34,6 @@ module.exports = class HintClient {
         console.log(`STATUS: ${error.response.status}`)
         return({ data: error.response.data, status: error.response.status })
       });
-    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
     return(hintResponse);
   };
 
@@ -53,17 +52,11 @@ module.exports = class HintClient {
         console.log(`STATUS: ${error.response.status}`)
         return({ data: error.response.data, status: error.response.status })
       });
-    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
     return(hintResponse);
   };
 
   async getLocations(){
-    let hintResponse = await axios.get(`${this.baseUri}/provider/locations`, {
-      auth: {
-        username: this.client_key,
-        pass: this.password
-      }
-    })
+    let hintResponse = await axios.get(`${this.baseUri}/provider/locations`, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
@@ -72,17 +65,11 @@ module.exports = class HintClient {
         console.log(`STATUS: ${error.response.status}`)
         return({ data: error.response.data, status: error.response.status })
       });
-    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
     return(hintResponse);
   };
 
   async getPractitioners(){
-    let hintResponse = await axios.get(`${this.baseUri}/provider/practitioners`, {
-      auth: {
-        username: this.client_key,
-        pass: this.password
-      }
-    })
+    let hintResponse = await axios.get(`${this.baseUri}/provider/practitioners`, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
@@ -91,7 +78,6 @@ module.exports = class HintClient {
         console.log(`STATUS: ${error.response.status}`)
         return({ data: error.response.data, status: error.response.status })
       });
-    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
     return(hintResponse);
   };
 }
