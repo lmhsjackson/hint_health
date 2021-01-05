@@ -11,7 +11,7 @@ module.exports = class HintClient {
   };
 
   async deleteCard(params){
-    let hintResponse = await axios.delete(`${this.baseUri}/provider/cards/${params.id}`, this.credentials())
+    let hintResponse = await axios.delete(`${this.baseUri}/provider/patients/${params.patientId}/cards/${params.id}`, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
@@ -24,7 +24,7 @@ module.exports = class HintClient {
   };
 
   async createCard(params){
-    let hintResponse = await axios.post(`${this.baseUri}/provider/cards`, params, this.credentials())
+    let hintResponse = await axios.post(`${this.baseUri}/provider/patients/${params.patient_id}/cards`, params, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
