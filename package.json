@@ -1,6 +1,6 @@
 {
   "name": "hint_health",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A client library for hint health api.",
   "main": "index.js",
   "scripts": {
