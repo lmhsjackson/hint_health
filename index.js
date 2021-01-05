@@ -6,13 +6,13 @@ module.exports = class HintClient {
     this.baseUri = 'https://api.hint.com/api';
   }
 
-  // credentials() {
-  //   return({ auth: { username: this.client_key, pass: this.password } })
-  // };
+  credentials() {
+    return({ auth: { username: this.client_key, pass: this.password } })
+  };
 
   async createPatient(params){
     let credentials = { auth: { username: this.client_key, pass: this.password } }
-    let hintResponse = await axios.post(`${this.baseUri}/provider/patients`, params, credentials)
+    let hintResponse = await axios.post(`${this.baseUri}/provider/patients`, params, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
@@ -21,14 +21,11 @@ module.exports = class HintClient {
         console.log(`STATUS: ${error.response.status}`)
         return({ data: error.response.data, status: error.response.status })
       });
-    // console.log(`data is: ${hintResponse.data}, status is: ${hintResponse.status}`);
     return(hintResponse);
   };
 
   async deletePatient(params){
-    let credentials = { auth: { username: this.client_key, pass: this.password } }
-    console.log(`${this.baseUri}/provider/patients/${params.id}`,)
-    let hintResponse = await axios.delete(`${this.baseUri}/provider/patients/${params.id}`, credentials)
+    let hintResponse = await axios.delete(`${this.baseUri}/provider/patients/${params.id}`, this.credentials())
       .then(function (response) {
         console.log(`STATUS: ${response.status}`)
         return({ data: response.data, status: response.status })
